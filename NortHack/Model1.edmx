@@ -86,6 +86,10 @@
           <Property Name="Owner" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Likes" Type="int" />
+          <Property Name="Contributors" Type="int" />
+          <Property Name="Followers" Type="int" />
+          <Property Name="PictureUrl" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -246,7 +250,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Model.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Model.AspNetUserLogins" />
           <EntitySet Name="Connection" EntityType="Model.Connection" />
-          <EntitySet Name="Idea" EntityType="Model.Idea" />
           <EntitySet Name="Profile" EntityType="Model.Profile" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -256,10 +259,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Connection_Idea" Association="Model.FK_Connection_Idea">
-            <End Role="Idea" EntitySet="Idea" />
-            <End Role="Connection" EntitySet="Connection" />
-          </AssociationSet>
           <AssociationSet Name="FK_Connection_Profile" Association="Model.FK_Connection_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Connection" EntitySet="Connection" />
@@ -267,6 +266,11 @@
           <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Idea" EntityType="Model.Idea" />
+          <AssociationSet Name="FK_Connection_Idea" Association="Model.FK_Connection_Idea">
+            <End Role="Idea" EntitySet="Idea" />
+            <End Role="Connection" EntitySet="Connection" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -317,20 +321,8 @@
           <Property Name="ProfileID" Type="Int32" />
           <Property Name="Likes" Type="Boolean" Nullable="false" />
           <Property Name="Follow" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Idea" Relationship="Model.FK_Connection_Idea" FromRole="Connection" ToRole="Idea" />
           <NavigationProperty Name="Profile" Relationship="Model.FK_Connection_Profile" FromRole="Connection" ToRole="Profile" />
-        </EntityType>
-        <EntityType Name="Idea">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Owner" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Connection" Relationship="Model.FK_Connection_Idea" FromRole="Idea" ToRole="Connection" />
+          <NavigationProperty Name="Idea" Relationship="Model.FK_Connection_Idea" FromRole="Connection" ToRole="Idea" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -374,18 +366,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Connection_Idea">
-          <End Type="Model.Idea" Role="Idea" Multiplicity="0..1" />
-          <End Type="Model.Connection" Role="Connection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Idea">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Connection">
-              <PropertyRef Name="IdeaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Connection_Profile">
           <End Type="Model.Profile" Role="Profile" Multiplicity="0..1" />
           <End Type="Model.Connection" Role="Connection" Multiplicity="*" />
@@ -401,6 +381,34 @@
         <Association Name="AspNetUserRoles">
           <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Idea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="Contributors" Type="Int32" />
+          <Property Name="Followers" Type="Int32" />
+          <NavigationProperty Name="Connection" Relationship="Model.FK_Connection_Idea" FromRole="Idea" ToRole="Connection" />
+          <Property Name="PictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Connection_Idea">
+          <End Type="Model.Idea" Role="Idea" Multiplicity="0..1" />
+          <End Type="Model.Connection" Role="Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Idea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="IdeaID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -474,18 +482,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Idea">
-            <EntityTypeMapping TypeName="Model.Idea">
-              <MappingFragment StoreEntitySet="Idea">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Profile">
             <EntityTypeMapping TypeName="Model.Profile">
               <MappingFragment StoreEntitySet="Profile">
@@ -508,6 +504,22 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Idea">
+            <EntityTypeMapping TypeName="Model.Idea">
+              <MappingFragment StoreEntitySet="Idea">
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Followers" ColumnName="Followers" />
+                <ScalarProperty Name="Contributors" ColumnName="Contributors" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

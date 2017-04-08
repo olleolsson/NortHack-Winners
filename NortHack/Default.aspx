@@ -4,30 +4,48 @@
 
     <div class="jumbotron">
 
-        <h1>Douchbag recognizer</h1>
-        <p>Victor Hugo</p>
+        <h1><%= Name %></h1>
+        <p><%= Owner %></p>
         <br />
         <br />
         <br />
-        <p>Picture here</p>
+        <p><img src="<%=PictureUrl%>" alt="some_text" style="width:auto;height:auto;"> <asp:Button id="buttonNext" OnClick="GetIdea" runat="server" Text="Next"/></p>
+        
         <br />
         <br />
-        <br />
-        <h2 class="Icons"><span class="glyphicon glyphicon-thumbs-up"> 20</span> 
-        <span class="glyphicon glyphicon-bookmark"> 10</span>
-        <span class="glyphicon glyphicon-signal"> 2</span></h2>  
+        <h2 class="Icons"><span class="glyphicon glyphicon-thumbs-up"> <%= Likes %></span> 
+        <span class="glyphicon glyphicon-bookmark"> <%=Followers %></span>
+        <span class="glyphicon glyphicon-signal"> <%= Contributors %></span></h2>  
 
 <%--        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Like &raquo;</a></p>--%>
         <h2>Pitch</h2>
             <p>
-                This is where the pitch is gonna be displayd
+                <%= Description %>
             </p>
 
     </div>
 
-    <footer><p><span class="glyphicon glyphicon-thumbs-up btn btn-primary"><br /> Like</span> 
-        <span class="glyphicon glyphicon-bookmark btn btn-primary"><br /> Follow</span>
-        <span class="glyphicon glyphicon-signal btn btn-primary"><br /> Team-up</span></p>  </footer>
+    <footer><p>
+        <asp:LinkButton ID="btnLike" 
+            runat="server" 
+            CssClass="btn btn-primary"    
+            OnClick="Like">
+        <span aria-hidden="true" class="glyphicon glyphicon-thumbs-up"> Like</span>
+        </asp:LinkButton> 
+        <asp:LinkButton ID="btnFollow" 
+            runat="server" 
+            CssClass="btn btn-primary"    
+            OnClick="Follow">
+        <span aria-hidden="true" class="glyphicon glyphicon-bookmark"> Follow</span>
+        </asp:LinkButton> 
+        <asp:LinkButton ID="btnContribute" 
+            runat="server" 
+            CssClass="btn btn-primary"    
+            OnClick="Contribute">
+        <span aria-hidden="true" class="glyphicon glyphicon-signal"> Team-up</span>
+        </asp:LinkButton> 
+        </p>
+        </footer>
 <style>
 p{
     font-size:7px;

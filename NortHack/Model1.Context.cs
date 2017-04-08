@@ -31,7 +31,7 @@ namespace NortHack
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<Connection> Connection { get; set; }
-        public virtual DbSet<Idea> Idea { get; set; }
         public virtual DbSet<Profile> Profile { get; set; }
+        public virtual DbSet<Idea> Idea { get; set; }
     }
 }

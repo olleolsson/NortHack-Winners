@@ -11,13 +11,13 @@
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="3" PointY="8.375" />
         <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="3" PointY="11.125" />
         <EntityTypeShape EntityType="Model.Connection" Width="1.5" PointX="5.625" PointY="1.125" />
-        <EntityTypeShape EntityType="Model.Idea" Width="1.5" PointX="3.375" PointY="5.125" />
         <EntityTypeShape EntityType="Model.Profile" Width="1.5" PointX="3.375" PointY="1" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="Model.FK_Connection_Idea" />
         <AssociationConnector Association="Model.FK_Connection_Profile" />
         <AssociationConnector Association="Model.AspNetUserRoles" />
+        <EntityTypeShape EntityType="Model.Idea" Width="1.5" PointX="7.375" PointY="5" />
+        <AssociationConnector Association="Model.FK_Connection_Idea" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

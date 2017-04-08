@@ -13,42 +13,120 @@ namespace NortHack
 {
     public partial class _Default : Page
     {
+
+        public string Name;
+        public string Owner;
+        public string Description;
+        public int Likes;
+        public int Contributors;
+        public int Followers;
+        public string PictureUrl;
+       // int counter = 1;
+        private int counter
+        {
+            get
+            {
+                if (Session["i"] == null)
+                return 1;
+                return (int)Session["i"];
+            }
+            set
+            {
+                Session["i"] = value;
+            }
+        }
+
         private Entities db = new Entities();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            //hej();
-        }
-        public void hej()
-        {
-            var hej = db.Idea.ToList();
-
-            var query = from b in db.Idea
-                        where b.Id == 1
-                        select b;
-
-            var key = db.Idea.Find(1);
-
-            foreach (var item in query)
+            var IdeaList = db.Idea.ToList();
+            foreach (var i in IdeaList)
             {
-                
-            }
 
-            List<Profile> profiles = new List<Profile>();
-            List<Idea> ideas = new List<Idea>();
-
-            profiles = db.Profile.ToList();
-            ideas = db.Idea.ToList();
-
-            Idea model = new Idea();
-            foreach (var i in hej)
-            {
-                if (i.Id == 1)
+                if (i.Id == counter)
                 {
-                    
 
+                    this.Name = i.Name;
+                    this.Owner = i.Owner;
+                    this.Description = i.Description;
+                    this.Likes = i.Likes.Value;
+                    this.Contributors = i.Contributors.Value;
+                    this.Followers = i.Followers.Value;
+                    this.PictureUrl = i.PictureUrl;
+                    break;
                 }
             }
+
+        }
+        public void GetIdea(Object sender, EventArgs e)
+        {
+            var IdeaList = db.Idea.ToList();
+            foreach (var i in IdeaList)
+            {
+                
+                if (i.Id == counter)
+                {
+
+                    this.Name = i.Name;
+                    this.Owner = i.Owner;
+                    this.Description = i.Description;
+                    this.Likes = i.Likes.Value;
+                    this.Contributors = i.Contributors.Value;
+                    this.Followers = i.Followers.Value;
+                    counter++;
+                    break;
+                }
+            }
+        }
+        public void Like(Object sender, EventArgs e)
+        {
+            int totalLikes;
+            var IdeaList = db.Idea.ToList();
+            foreach (var i in IdeaList)
+            {
+                if (i.Id == counter)
+                {
+                    totalLikes = i.Likes.Value;
+                    totalLikes++;
+                    i.Likes = totalLikes;
+                    db.SaveChanges();
+                }              
+            }            
+        }
+        public void Follow(Object sender, EventArgs e)
+        {
+            int totalFollows;
+            var IdeaList = db.Idea.ToList();
+            foreach (var i in IdeaList)
+            {
+                if (i.Id == counter)
+                {
+                    totalFollows = i.Followers.Value;
+                    totalFollows++;
+                    i.Followers = totalFollows;
+                    db.SaveChanges();
+                }
+            }
+        }
+        public void Contribute(Object sender, EventArgs e)
+        {
+            int totalContribute;
+            var IdeaList = db.Idea.ToList();
+            foreach (var i in IdeaList)
+            {
+                if (i.Id == counter)
+                {
+                    totalContribute = i.Contributors.Value;
+                    totalContribute++;
+                    i.Contributors = totalContribute;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        private void InitializeComponent()
+        {
+
         }
     }
 }

@@ -20,7 +20,7 @@ namespace NortHack
         public bool Likes { get; set; }
         public bool Follow { get; set; }
     
-        public virtual Idea Idea { get; set; }
         public virtual Profile Profile { get; set; }
+        public virtual Idea Idea { get; set; }
     }
 }
