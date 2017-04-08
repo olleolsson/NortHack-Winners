@@ -3,9 +3,11 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        <p>Like: <span class="glyphicon glyphicon-thumbs-up btn btn-primary"></span></p>  
+        <h1>This is where the idea is</h1>
+        <p class="lead">This is lorem ipsum for an idea</p>
+        <span class="glyphicons glyphicons-thumbs-up"></span>
+        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Like &raquo;</a></p>
     </div>
 
     <div class="row">
