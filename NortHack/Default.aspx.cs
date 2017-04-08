@@ -21,6 +21,7 @@ namespace NortHack
         public int Contributors;
         public int Followers;
         public string PictureUrl;
+        public string Pitch;
        // int counter = 1;
         private int counter
         {
@@ -39,6 +40,7 @@ namespace NortHack
         private Entities db = new Entities();
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             var IdeaList = db.Idea.ToList();
             foreach (var i in IdeaList)
             {
@@ -53,6 +55,7 @@ namespace NortHack
                     this.Contributors = i.Contributors.Value;
                     this.Followers = i.Followers.Value;
                     this.PictureUrl = i.PictureUrl;
+                    this.Pitch = i.Pitch;
                     break;
                 }
             }
@@ -60,6 +63,8 @@ namespace NortHack
         }
         public void GetIdea(Object sender, EventArgs e)
         {
+            counter++;
+
             var IdeaList = db.Idea.ToList();
             foreach (var i in IdeaList)
             {
@@ -73,8 +78,18 @@ namespace NortHack
                     this.Likes = i.Likes.Value;
                     this.Contributors = i.Contributors.Value;
                     this.Followers = i.Followers.Value;
-                    counter++;
+                    this.PictureUrl = i.PictureUrl;
+                   
                     break;
+                }
+                else
+                {
+                    //this.Name = "No more ideas";
+                    //this.Owner = "";
+                    //this.Description = "";
+                    //this.Likes = 0;
+                    //this.Contributors = 0;
+                    //this.Followers = 0;
                 }
             }
         }
@@ -91,7 +106,24 @@ namespace NortHack
                     i.Likes = totalLikes;
                     db.SaveChanges();
                 }              
-            }            
+            }
+            
+            foreach (var i in IdeaList)
+            {
+
+                if (i.Id == counter)
+                {
+
+                    this.Name = i.Name;
+                    this.Owner = i.Owner;
+                    this.Description = i.Description;
+                    this.Likes = i.Likes.Value;
+                    this.Contributors = i.Contributors.Value;
+                    this.Followers = i.Followers.Value;
+                    this.PictureUrl = i.PictureUrl;
+                    break;
+                }
+            }
         }
         public void Follow(Object sender, EventArgs e)
         {
@@ -107,6 +139,22 @@ namespace NortHack
                     db.SaveChanges();
                 }
             }
+            foreach (var i in IdeaList)
+            {
+
+                if (i.Id == counter)
+                {
+
+                    this.Name = i.Name;
+                    this.Owner = i.Owner;
+                    this.Description = i.Description;
+                    this.Likes = i.Likes.Value;
+                    this.Contributors = i.Contributors.Value;
+                    this.Followers = i.Followers.Value;
+                    this.PictureUrl = i.PictureUrl;
+                    break;
+                }
+            }
         }
         public void Contribute(Object sender, EventArgs e)
         {
@@ -120,6 +168,22 @@ namespace NortHack
                     totalContribute++;
                     i.Contributors = totalContribute;
                     db.SaveChanges();
+                }
+            }
+            foreach (var i in IdeaList)
+            {
+
+                if (i.Id == counter)
+                {
+
+                    this.Name = i.Name;
+                    this.Owner = i.Owner;
+                    this.Description = i.Description;
+                    this.Likes = i.Likes.Value;
+                    this.Contributors = i.Contributors.Value;
+                    this.Followers = i.Followers.Value;
+                    this.PictureUrl = i.PictureUrl;
+                    break;
                 }
             }
         }

@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="NortHack._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    
     <div class="jumbotron">
 
         <h1><%= Name %></h1>
-        <p><%= Owner %></p>
+        <p><%= Owner %> </p>
+               
         <br />
         <br />
         <br />
@@ -13,12 +14,17 @@
         
         <br />
         <br />
-        <h2 class="Icons"><span class="glyphicon glyphicon-thumbs-up"> <%= Likes %></span> 
-        <span class="glyphicon glyphicon-bookmark"> <%=Followers %></span>
-        <span class="glyphicon glyphicon-signal"> <%= Contributors %></span></h2>  
+        <h2 class="Icons"><i class="fa fa-thumbs-o-up" aria-hidden="true"><%= Likes %></i>  
+        <i class="fa fa-bookmark-o" aria-hidden="true"><%=Followers %></i> 
+            
+        <i class="fa fa-wifi" aria-hidden="true"><%= Contributors %></i> </h2>  
 
-<%--        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Like &raquo;</a></p>--%>
         <h2>Pitch</h2>
+            <p>
+                <%= Pitch %>
+            </p>
+        <br />
+                <h2>Description</h2>
             <p>
                 <%= Description %>
             </p>

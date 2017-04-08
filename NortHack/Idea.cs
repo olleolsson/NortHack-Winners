@@ -30,6 +30,7 @@ namespace NortHack
         public Nullable<int> Contributors { get; set; }
         public Nullable<int> Followers { get; set; }
         public string PictureUrl { get; set; }
+        public string Pitch { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Connection> Connection { get; set; }

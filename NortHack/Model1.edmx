@@ -90,6 +90,7 @@
           <Property Name="Contributors" Type="int" />
           <Property Name="Followers" Type="int" />
           <Property Name="PictureUrl" Type="nvarchar(max)" />
+          <Property Name="Pitch" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -397,6 +398,7 @@
           <Property Name="Followers" Type="Int32" />
           <NavigationProperty Name="Connection" Relationship="Model.FK_Connection_Idea" FromRole="Idea" ToRole="Connection" />
           <Property Name="PictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pitch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Connection_Idea">
           <End Type="Model.Idea" Role="Idea" Multiplicity="0..1" />
@@ -507,6 +509,7 @@
           <EntitySetMapping Name="Idea">
             <EntityTypeMapping TypeName="Model.Idea">
               <MappingFragment StoreEntitySet="Idea">
+                <ScalarProperty Name="Pitch" ColumnName="Pitch" />
                 <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
                 <ScalarProperty Name="Followers" ColumnName="Followers" />
                 <ScalarProperty Name="Contributors" ColumnName="Contributors" />
