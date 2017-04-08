@@ -10,7 +10,7 @@
         <br />
         <br />
         <br />
-        <p><img src="<%=PictureUrl%>" alt="some_text" style="width:auto;height:auto;"> <asp:Button id="buttonNext" OnClick="GetIdea" runat="server" Text="Next"/></p>
+        <p><img src="<%=PictureUrl%>" alt="Picture missing" style="width:auto;height:auto;"> <asp:Button id="buttonNext" OnClick="GetIdea" runat="server" Text="Next"/></p>
         
         <br />
         <br />
@@ -68,9 +68,9 @@ h2{
 #footer {
    position:fixed;
    left:0px;
-   bottom:0px;
-   height:30px;
-   width:100%;
+   bottom: 0px;
+   height: 30px;
+   width: 100%;
    background:#999;
    margin-left:auto;
    margin-right:auto;

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace NortHack.API
+namespace NortHack
 {
     public class ProductAPI : ApiController
     {
